@@ -378,7 +378,7 @@ atlantis server --bitbucket-token="token"
 ATLANTIS_BITBUCKET_TOKEN="token"
 ```
 
-Bitbucket app password of API user.
+Bitbucket API token or app password of the API user, or a Bitbucket Cloud [access token](access-credentials.md#bitbucket-cloud-access-tokens). Access tokens (prefix `ATCT`) are sent to the API as a Bearer token.
 
 ### `--bitbucket-user`
 
@@ -389,6 +389,8 @@ ATLANTIS_BITBUCKET_USER="myuser"
 ```
 
 Bitbucket username used for git operations. For Bitbucket Cloud, if `--bitbucket-api-user` is not specified, this value will also be used for API authentication.
+
+When `--bitbucket-token` is a Bitbucket Cloud [access token](access-credentials.md#bitbucket-cloud-access-tokens), set this to `x-token-auth`.
 
 ### `--bitbucket-webhook-secret`
 

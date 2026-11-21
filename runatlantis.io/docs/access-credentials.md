@@ -147,6 +147,14 @@ Since v0.30.0, a new permission for `Actions` has been added, which is required 
 * **Account**: **Read** also allows Atlantis to identify and ignore its own comments. For scoped API tokens, the equivalent permission is `read:user:bitbucket`. If the identity lookup fails, Atlantis logs a warning and continues normal command processing. In that case, its own comments may still be parsed as commands, including producing parsing errors.
 * Record the access token
 
+#### Bitbucket Cloud access tokens
+
+Atlantis can also use a Bitbucket Cloud [access token](https://support.atlassian.com/bitbucket-cloud/docs/access-tokens/) instead of a user's API token or app password. Access tokens belong to a repository, project or workspace rather than to a user. Project and workspace tokens need a Premium plan.
+
+* Create the token with **Repositories**: **Read** and **Pull requests**: **Read** and **Write**. On a workspace token, also select **Account**: **Read** so Atlantis can identify its own comments. Repository tokens don't offer that scope.
+* Set [`--bitbucket-user`](server-configuration.md#bitbucket-user) to `x-token-auth`, the username Bitbucket expects for git over HTTPS with an access token, and set [`--bitbucket-token`](server-configuration.md#bitbucket-token) to the token. Leave [`--bitbucket-api-user`](server-configuration.md#bitbucket-api-user) unset.
+* Atlantis recognizes access tokens by the `ATCT` prefix Bitbucket gives them and sends them to the API as a [Bearer token](https://support.atlassian.com/bitbucket-cloud/docs/using-access-tokens/) instead of using Basic Auth.
+
 ### Bitbucket Server (aka Stash)
 
 * Click on your avatar in the top right and select **Manage account**
